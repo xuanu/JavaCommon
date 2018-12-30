@@ -97,12 +97,6 @@ public class FileUtils {
 		}
 	}
 
-	/**
-	 * �����ļ��� MD5 ֵ�����ڱȽ������ļ��Ƿ���ͬ��
-	 * 
-	 * @param file
-	 * @return
-	 */
 	public static String getFileMD5(File file) {
 		if (!file.isFile()) {
 			return null;
@@ -159,5 +153,33 @@ public class FileUtils {
 		int d1 = n / 16;
 		int d2 = n % 16;
 		return hexDigits[d1] + hexDigits[d2];
+	}
+
+	public static final long A_GB = 1073741824;
+	public static final long A_MB = 1048576;
+	public static final int A_KB = 1024;
+
+	/**
+	 * 格式化Byte数值
+	 *
+	 * @param space Byte数值
+	 * @return 格式化后的字符串
+	 */
+	public static String fmtSpace(long space) {
+		if (space <= 0) {
+			return "0";
+		}
+		double gbValue = (double) space / A_GB;
+		if (gbValue >= 1) {
+			return String.format("%.2fGB", gbValue);
+		} else {
+			double mbValue = (double) space / A_MB;
+			if (mbValue >= 1) {
+				return String.format("%.2fMB", mbValue);
+			} else {
+				final double kbValue = space / A_KB;
+				return String.format("%.2fKB", kbValue);
+			}
+		}
 	}
 }
